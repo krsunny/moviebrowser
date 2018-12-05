@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/datepicker3.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  
+  <!--Custom Font-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+@import url('https://fonts.googleapis.com/css?family=Orbitron:700|Rajdhani:500,600');
+
+
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px; 
+  background-color: #ddd;
+}
+
+
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align: center;
+}
+
+.navbar h1 {
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+article {
+  margin: 30px 0;
+
+}
+
+article h2 {
+  margin-bottom: 15px;
+}
+
+article a {
+  transition: 0.4s;
+}
+
+article a:hover {
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+article a.btn-more {
+  display: inline-block;
+  text-transform: uppercase;
+  color: #0e2f44;
+  font-size: 0.8rem;
+  border: 1px solid #0e2f44;
+  margin: 10px 0; 
+  padding: 5px 15px;
+}
+
+article a.btn-more:hover {
+  background-color: #0e2f44;
+  color: #fff;
+}
+
+article h2 a {
+  color: #0e2f44;
+  transition: 0.4s;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+
+article p.date {
+  font-size: 1.8rem;
+  margin-bottom: 0;
+}
+
+article .author {
+  font-size: 2rem;
+}
+
+
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        
+        <a class="navbar-brand" href="#"><span>Movie</span>Api</a>
+        
+          
+          
+      
+      </div>
+    </div><!-- /.container-fluid -->
+  </nav>
+  
+    
+  <div class="col-md-12" ng-app="myApp">
+    
+    <div class="row">
+      
+      <div class="">
+        <div class="panel panel-default">
+          
+        <div class="row ">
+          <div class="container">
+            
+            <div id="content" ng-controller="myCtrl" class="">
+              <article ng-repeat="a in myWelcome"  class=" col-lg-4 col-md-4 col-sm-4 col-xs-12" style="height:1000px;">
+        <h2><a class="article-header" href="{{a.original_title}}">{{a.title}}</a></h2>
+       
+          <div class="">
+            <img class="img-fluid rounded mb-3" ng-src="https://image.tmdb.org/t/p/w342{{a.poster_path}}"style="width:100%"; />
+          </div>
+        
+            <p class="date">Release Date {{a.release_date}}</p>
+            <p > Imdb rating {{a.vote_average}}</p>
+            <p class="author">Vote by {{a.vote_count}}</p>
+            <p >{{a.overview}}</p>
+            
+            
+          
+        
+        
+
+      </article>
+            </div>
+          </div>
+        </div>
+
+  <footer class="footer">
+    <div class="container">Powered by News API</div>
+  </footer>
+
+          
+        </div>
+      </div>
+      
+    </div><!-- /.row -->
+      
+  </div><!--/.main-->
+  
+    <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/chart.min.js"></script>
+  <script src="js/chart-data.js"></script>
+  <script src="js/easypiechart.js"></script>
+  <script src="js/easypiechart-data.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/custom.js"></script>
+  <script>
+    var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope,$http) {
+    $http.get("https://api.themoviedb.org/3/discover/movie?api_key=c95cab11a51c622688cc676e69e5ca91")
+   .then(function(response) {
+       $scope.myWelcome = response.data.results;
+        console.log($scope.myWelcome)
+        
+   });
+});
+
+
+
+  </script>
+  
+</body>
+</html>
